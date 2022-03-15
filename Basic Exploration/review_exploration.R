@@ -3,6 +3,8 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(jsonlite)
 library(dplyr)
 library(superml)
+library(wordcloud2)
+
 json_file<-'yelp_academic_dataset_review.json'
 
 con_out <- file(tmp <- tempfile(), open = "wb")
@@ -46,3 +48,10 @@ write.csv(word2, 'bad_review.csv',row.names=F)
 
 #################
 
+word1_new = read.csv('good_review.csv')
+word2_new = read.csv('bad_review.csv')
+word1_new = word1_new[-c(1,2),]
+word2_new = word2_new[-c(1,2),]
+
+wordcloud2(word1_new,color='random-light',backgroundColor='black')
+wordcloud2(word2_new,color='random-light',backgroundColor='black')
